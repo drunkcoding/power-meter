@@ -1,0 +1,21 @@
+{
+    "configurations": [
+        {
+            "name": "Linux",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "/usr/local/cuda-10.2/include/",
+                "${workspaceFolder}/googletest/googletest/",
+                "${workspaceFolder}/googletest/googletest/include",
+                "${workspaceFolder}/build/_deps/googletest-src/googletest/include",
+                "${workspaceFolder}/build/_deps/pcm-src/src"
+            ],
+            "defines": [],
+            "compilerPath": "/usr/bin/gcc",
+            "cStandard": "gnu11",
+            "cppStandard": "c++11",
+            "intelliSenseMode": "linux-gcc-x64"
+        }
+    ],
+    "version": 4
+}
