@@ -3,6 +3,7 @@
 #include <cuda_runtime.h>
 
 #include <chrono>
+#include <fstream>
 
 GPUMeter *GPUMeter::self_ = new GPUMeter();
 
@@ -44,14 +45,16 @@ void GPUMeter::runMonitor(int deviceID) {
         (stats_after.powerUsage + stats_before.powerUsage) / 2 / 1000;
     double jourel = average_power * period.count() / 1e6;
 
-    METER_LOG_INFO << "GPU Energy (J) " << jourel;
+    METER_LOG_INFO << "(" << queryStart.time_since_epoch().count() << ")" << " GPU " << deviceID << " Energy(J) " << jourel
+                   << " Power(mW) " << stats_after.powerUsage;
     METER_LOG_DEBUG << "Duration (us) " << period.count();
     METER_LOG_DEBUG << "Last power (mW) " << stats_before.powerUsage
                     << ", After power (mW) " << stats_after.powerUsage;
     auto queryEnd = NOW();
 
     std::this_thread::sleep_for(
-        MICROSECONDS(std::chrono::milliseconds(interval_) - MILLISECONDS(queryEnd - queryStart)));
+        MICROSECONDS(std::chrono::milliseconds(interval_) -
+                     MILLISECONDS(queryEnd - queryStart)));
   }
 }
 

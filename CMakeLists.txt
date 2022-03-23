@@ -53,11 +53,21 @@ target_link_libraries(
   test_sanity
   gtest_main
   nvidia-ml
-  cublas
 )
 
 include(GoogleTest)
 gtest_discover_tests(test_sanity)
 
 # add_subdirectory (include)
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -std=c++11 -O3 -Wall")
+# set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -std=c++11 -O3 -Wall")
+
+cuda_add_executable(
+  main
+  main.cc
+  ${INCLUDE_SRC}
+  # ${PCM_SRC}
+)
+target_link_libraries(
+  main
+  nvidia-ml
+)

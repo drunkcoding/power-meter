@@ -5,6 +5,7 @@
 #include <cstdint>
 #include <thread>
 #include <vector>
+#include <string>
 
 #include "noncopyable.h"
 #include "types.h"
@@ -14,6 +15,7 @@ class Meter : noncopyable {
  public:
   void setInterval(std::uint32_t interval) { interval_ = interval; }
   void setNumDevice(std::uint32_t numDevice) { numDevice_ = numDevice; }
+  void setPipe(const char* pipePath) { pipe_.assign(pipePath); }
   
   virtual void initNumDevice() = 0;
 
@@ -54,6 +56,7 @@ class Meter : noncopyable {
   bool loop_ = false;
   std::uint32_t interval_ = 10;
   std::uint32_t numDevice_ = 0;
+  std::string pipe_;
   void (*monitorPtr)(){nullptr};
   std::vector<std::thread> threads_;
 };
